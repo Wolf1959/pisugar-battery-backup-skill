@@ -6,7 +6,9 @@ def getBattery():
     stream=os.popen("echo 'get battery' | nc -q 0 127.0.0.1 8423 | sed -e 's/battery: //' -e 's/\..*//'")
     output = stream.read()
     return(output.strip())
-
+"""
+This is for newer PiSugar hardware; please check documentation for older hardare as I have none available for testing
+"""
 def getCharger():
     stream = os.popen("echo 'get battery_power_plugged' | nc -q 0 127.0.0.1 8423| sed -e's/battery_power_plugged: //' | tr '[:lower:]' '[:upper:]'")
     output = stream.read()
