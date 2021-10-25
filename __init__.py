@@ -66,7 +66,8 @@ class PisugarBatteryBackup(MycroftSkill):
 
         if getCharger() == 'TRUE':
             if self.pluggedIn == False:
-                self.speak('Thanks, I needed that!')
+#                self.speak('Thanks, I needed that!')
+                self.speak_dialog('charging.pisugar')
             self.resetFlags()
         else:
             self.pluggedIn = False
