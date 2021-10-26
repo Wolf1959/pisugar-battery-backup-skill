@@ -66,34 +66,36 @@ class PisugarBatteryBackup(MycroftSkill):
 
         if getCharger() == 'TRUE':
             if self.pluggedIn == False:
-#                self.speak('Thanks, I needed that!')
                 self.speak_dialog('charging.pisugar')
             self.resetFlags()
+            batteryPercent = int(getBattery())
+            if batteryPercent >= 100:
+                self.speak_dialog('unplug.pisugar')
         else:
             self.pluggedIn = False
             batteryPercent = int(getBattery())
 
             if batteryPercent <= 5 and self.b5 == True:
                 self.b5 = False
-                self.speak(f'I will shutdown if you do no recharge soon. Battery Charge is {batteryPercent}%')
+                self.speak(f'I will shutdown if you do no recharge soon. Battery Charge is only {batteryPercent}%')
             elif batteryPercent <= 10 and self.b10 == True:
                 self.b10 = False
-                self.speak(f'Please recharge soon. Battery Charge is {batteryPercent}%')
+                self.speak(f'You need to recharge soon. Battery Charge is {batteryPercent}%')
             elif batteryPercent <= 15 and self.b15 == True:
                 self.b15 = False
                 self.speak(f'Please recharge soon. Battery Charge is {batteryPercent}%')
             elif batteryPercent <= 20 and self.b20 == True:
                 self.b20 = False
-                self.speak(f'Please recharge soon. Battery Charge is {batteryPercent}%')
+                self.speak(f'Please recharge soon. Battery is at {batteryPercent}%')
             elif batteryPercent <= 25 and self.b25 == True:
                 self.b25 = False
-                self.speak(f'Please recharge soon. Battery Charge is {batteryPercent}%')
+                self.speak(f'You need to recharge soon. Battery is at {batteryPercent}%')
             elif batteryPercent <= 50 and self.b50 == True:
                 self.b50 = False
-                self.speak(f'Battery Charge is {batteryPercent}%')
+                self.speak('My Battery is getting rumbly')
             elif batteryPercent <= 75 and self.b75 == True:
                 self.b75 = False
-                self.speak(f'Battery Charge is {batteryPercent}%')
+                self.speak('Feed Me!')
 
 def create_skill():
     return PisugarBatteryBackup()
